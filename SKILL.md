@@ -40,15 +40,23 @@ One iteration = ONE task. Small iterations -> fresh context, no rot. Never batch
 - Work inside that task's project folder. That project's CLAUDE.md is authoritative.
 - **Judge task size, then delegate:**
   - Tiny task (few minutes, one or two files) -> do it yourself. Spawning a worker costs more than it saves.
-  - Bigger task -> spawn ONE subagent via the Agent tool to do the build work. Model by difficulty: `haiku` for trivial mechanical work (renames, log checks, simple file ops), `sonnet` for normal build work (the default), `opus` for hard/complex work. Only use `fable` workers when the task explicitly demands top-tier reasoning.
+  - Bigger task -> spawn ONE subagent via the Agent tool to do the build work. Model by difficulty: `haiku` for trivial mechanical work (renames, log checks, simple file ops), `sonnet` for normal build work (the default), `opus` for hard/complex work. **`fable` workers = never, unless the task title explicitly says `[FABLE]`.** Default-deny — protects Igor's Fable credits.
   - Give the worker: the full task description incl. `Done when:`, the exact project folder path, and the relevant CLAUDE.md rules (lanes + hard rules bind the worker too).
   - Worker returns what it did + exact file paths. **Worker output = claim, not proof.**
 
-## 5. Verify — proof or no completion — NEVER delegated
+## 5. Verify — proof ladder, strongest first — NEVER graded by the builder
 
-- Verify yourself (the orchestrator). Never let the worker or a cheaper model grade its own work.
-- Test the `Done when:` condition with real evidence: command output, file content/mtime, browser check (preview tools) for anything UI.
-- Never claim done without proof. Verify fails -> fix (or re-brief the worker) and re-verify, or BLOCKED with reason.
+Words are not proof. Worker prose without command output = claim. Test the `Done when:` condition this way:
+
+1. **Executable proof (always first choice):** exit codes, test assertions, data read-back (SQL/gws/file content). If the outcome can be checked by running a command, run it.
+2. **Web UI -> Playwright CLI spec:** write a minimal `.spec.ts` assertion, run `npx playwright test` headless (pin `channel: 'chromium'` so headed/headless match). Exit code + assertion output = proof. Do NOT use Playwright MCP for verification (token-heavy, stale-snapshot hallucinations). Visual state: `toHaveScreenshot()`. Page structure: `toMatchAriaSnapshot()`. The spec stays in the project = free regression check on future laps.
+3. **Skeptic subagent — for whatever execution can't fully cover:**
+   - Fresh context, zero anchoring. Give it ONLY: the `Done when:` line, exact file paths/URLs, and the instruction "try to prove this claim FALSE by running the checks yourself." Never pass it the build history or the worker's report.
+   - Model: `sonnet` + tool access for objective checks (default). `opus` for fuzzy judgment (visual quality, tone, UX). Never `fable`.
+   - The done-claim stands only if the skeptic couldn't kill it. Skeptic refutes -> back to DO (re-brief worker) or BLOCKED with the skeptic's evidence.
+4. Non-web surfaces: Apps Script -> clasp/local test or execution-log read; email -> test-mode send to Igor first; DB -> read the data back and compare.
+
+- Verify fails -> fix and re-verify, or BLOCKED with reason. Never claim done without proof.
 
 ## 6. Close
 

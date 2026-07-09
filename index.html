@@ -69,7 +69,7 @@
     <div class="cmdbar">/loop /focus-loop <span>&lt;any Focus OS project&gt;</span></div>
   </header>
 
-  <div class="banner"><strong>Real test = a project where you planned phases.</strong> &ldquo;Loop Pilot&rdquo; was only a pipe-check. Diagram 4 shows where it fits.</div>
+  <div class="banner"><strong>Real test = a project where you planned phases.</strong> &ldquo;Loop Pilot&rdquo; was only a pipe-check. Diagram 5 shows where it fits.</div>
 
   <!-- ============ 1. THE LOOP ============ -->
   <section>
@@ -167,9 +167,42 @@
     </svg>
   </section>
 
-  <!-- ============ 3. LANES ============ -->
+  <!-- ============ 3. VERIFICATION LADDER ============ -->
   <section>
-    <h2>3 &middot; Safety lanes &mdash; the title tag decides how far the loop may go</h2>
+    <h2>3 &middot; How &ldquo;done&rdquo; gets proven &mdash; the verification ladder</h2>
+    <svg viewBox="0 0 740 400" role="img" aria-label="Verification ladder: executable proof, playwright spec, skeptic subagent; words alone banned">
+      <!-- rung 1 -->
+      <rect x="60" y="16" width="620" height="72" rx="10" fill="var(--auto-soft)" stroke="var(--auto)" stroke-width="2"/>
+      <circle cx="32" cy="52" r="16" fill="var(--auto)"/>
+      <text x="32" y="57" text-anchor="middle" font-size="13" font-weight="700" fill="var(--card)">1</text>
+      <text x="80" y="45" font-size="13.5" font-weight="700" fill="var(--auto)">🧪 EXECUTABLE PROOF &mdash; always first</text>
+      <text x="80" y="66" font-size="11" fill="var(--ink)">exit codes &middot; test assertions &middot; read the data back (SQL / gws / file content)</text>
+      <!-- rung 2 -->
+      <rect x="60" y="104" width="620" height="72" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+      <circle cx="32" cy="140" r="16" fill="var(--accent)"/>
+      <text x="32" y="145" text-anchor="middle" font-size="13" font-weight="700" fill="var(--card)">2</text>
+      <text x="80" y="133" font-size="13.5" font-weight="700" fill="var(--accent)">🎭 PLAYWRIGHT SPEC &mdash; anything web UI</text>
+      <text x="80" y="154" font-size="11" fill="var(--ink)">write tiny test once &rarr; run headless &rarr; pass/fail &middot; CLI not MCP (4&times; cheaper) &middot; spec stays = free regression check</text>
+      <!-- rung 3 -->
+      <rect x="60" y="192" width="620" height="72" rx="10" fill="var(--me-soft)" stroke="var(--me)" stroke-width="2"/>
+      <circle cx="32" cy="228" r="16" fill="var(--me)"/>
+      <text x="32" y="233" text-anchor="middle" font-size="13" font-weight="700" fill="var(--card)">3</text>
+      <text x="80" y="221" font-size="13.5" font-weight="700" fill="var(--me)">🕵️ SKEPTIC SUBAGENT &mdash; what execution can't cover</text>
+      <text x="80" y="242" font-size="11" fill="var(--ink)">fresh context &middot; sees ONLY Done when: + paths &middot; ordered to REFUTE &middot; sonnet default / opus fuzzy / never fable</text>
+      <!-- rung 4: banned -->
+      <rect x="60" y="280" width="620" height="60" rx="10" fill="var(--blocked-soft)" stroke="var(--blocked)" stroke-width="2" stroke-dasharray="6 4"/>
+      <circle cx="32" cy="310" r="16" fill="var(--blocked)"/>
+      <text x="32" y="315" text-anchor="middle" font-size="13" font-weight="700" fill="var(--card)">✕</text>
+      <text x="80" y="305" font-size="13.5" font-weight="700" fill="var(--blocked)">🗣️ WORDS ALONE &mdash; banned</text>
+      <text x="80" y="326" font-size="11" fill="var(--ink)">&ldquo;sounds done&rdquo; = claim, not proof &middot; builder never grades its own work</text>
+      <!-- killer stat -->
+      <text x="370" y="370" text-anchor="middle" font-size="11" font-weight="600" fill="var(--muted)">research: an LLM judge scored a BROKEN build 0.85/1.0 on nice prose &mdash; the execution check scored it 0.00. Exit codes don't lie.</text>
+    </svg>
+  </section>
+
+  <!-- ============ 4. LANES ============ -->
+  <section>
+    <h2>4 &middot; Safety lanes &mdash; the title tag decides how far the loop may go</h2>
     <svg viewBox="0 0 740 350" role="img" aria-label="Lane gate: task title prefix routes to four outcomes">
       <defs>
         <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -238,7 +271,7 @@
 
   <!-- ============ 3. WHERE IT FITS ============ -->
   <section>
-    <h2>4 &middot; Where it fits &mdash; plan first, loop executes the phases</h2>
+    <h2>5 &middot; Where it fits &mdash; plan first, loop executes the phases</h2>
     <svg viewBox="0 0 740 250" role="img" aria-label="Pipeline: plan, save phases as tasks, fire loop, review">
       <defs>
         <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
@@ -281,7 +314,7 @@
 
   <!-- ============ 4. TEST TIMELINE ============ -->
   <section>
-    <h2>5 &middot; What to test it on</h2>
+    <h2>6 &middot; What to test it on</h2>
     <svg viewBox="0 0 740 235" role="img" aria-label="Timeline: now Loop Pilot, next planned build, Aug 31 school pipelines">
       <line x1="50" y1="52" x2="700" y2="52" stroke="var(--ring)" stroke-width="3"/>
       <g>
@@ -321,7 +354,7 @@
 
   <!-- ============ 5. TASK ANATOMY ============ -->
   <section>
-    <h2>6 &middot; Anatomy of a loop-ready task</h2>
+    <h2>7 &middot; Anatomy of a loop-ready task</h2>
     <svg viewBox="0 0 740 240" role="img" aria-label="Task card with lane tag and Done when line labelled">
       <!-- task card -->
       <rect x="25" y="25" width="440" height="190" rx="12" fill="var(--code-bg)" stroke="var(--line)" stroke-width="1.5"/>
