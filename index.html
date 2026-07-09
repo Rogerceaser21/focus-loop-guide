@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<title>focus-loop — visual guide</title>
+<style>
+  :root {
+    --bg: #f4f5f7; --card: #ffffff; --ink: #1d232c; --muted: #5c6672;
+    --line: #d5d9df; --accent: #d9560b; --accent-soft: #fdeee2;
+    --auto: #1e7d43; --auto-soft: #e3f3e9;
+    --me: #a06a00; --me-soft: #fbf1d8;
+    --none: #5c6672; --none-soft: #e8eaee;
+    --blocked: #b03540; --blocked-soft: #f9e8ea;
+    --code-bg: #eceef1; --ring: #c6cbd3;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14181e; --card: #1c222b; --ink: #e8ebef; --muted: #9aa4b1;
+      --line: #303844; --accent: #f0813d; --accent-soft: #33231a;
+      --auto: #5cc98a; --auto-soft: #1c2f24;
+      --me: #e3b34c; --me-soft: #322a17;
+      --none: #9aa4b1; --none-soft: #262d38;
+      --blocked: #e08d96; --blocked-soft: #332124;
+      --code-bg: #262d38; --ring: #3c4550;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14181e; --card: #1c222b; --ink: #e8ebef; --muted: #9aa4b1;
+    --line: #303844; --accent: #f0813d; --accent-soft: #33231a;
+    --auto: #5cc98a; --auto-soft: #1c2f24; --me: #e3b34c; --me-soft: #322a17;
+    --none: #9aa4b1; --none-soft: #262d38; --blocked: #e08d96; --blocked-soft: #332124;
+    --code-bg: #262d38; --ring: #3c4550;
+  }
+  :root[data-theme="light"] {
+    --bg: #f4f5f7; --card: #ffffff; --ink: #1d232c; --muted: #5c6672;
+    --line: #d5d9df; --accent: #d9560b; --accent-soft: #fdeee2;
+    --auto: #1e7d43; --auto-soft: #e3f3e9; --me: #a06a00; --me-soft: #fbf1d8;
+    --none: #5c6672; --none-soft: #e8eaee; --blocked: #b03540; --blocked-soft: #f9e8ea;
+    --code-bg: #eceef1; --ring: #c6cbd3;
+  }
+  body { background: var(--bg); color: var(--ink); margin: 0;
+    font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+    padding: 2rem 1rem 4rem; }
+  main { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.6rem; }
+  h1 { font-family: "Avenir Next", -apple-system, system-ui, sans-serif;
+    font-size: 1.7rem; margin: 0; text-wrap: balance; }
+  .cmdbar { background: var(--code-bg); border: 1px solid var(--line);
+    border-left: 4px solid var(--accent); border-radius: 8px; padding: .7rem 1rem;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 1rem;
+    overflow-x: auto; white-space: nowrap; margin-top: .8rem; }
+  .cmdbar span { color: var(--muted); }
+  .banner { border-left: 4px solid var(--accent); background: var(--accent-soft);
+    border-radius: 8px; padding: .7rem 1rem; font-size: .95rem; }
+  section { background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 1.1rem 1.2rem 1.3rem; }
+  section h2 { font-size: .8rem; text-transform: uppercase; letter-spacing: .09em;
+    color: var(--accent); margin: 0 0 .4rem; font-weight: 700; }
+  svg { width: 100%; height: auto; display: block; }
+  svg text { font-family: -apple-system, "Segoe UI", system-ui, sans-serif; }
+  .mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+</style>
+
+</head>
+<body>
+<main>
+  <header>
+    <h1>🔁 focus-loop &mdash; how it works, in pictures</h1>
+    <div class="cmdbar">/loop /focus-loop <span>&lt;any Focus OS project&gt;</span></div>
+  </header>
+
+  <div class="banner"><strong>Real test = a project where you planned phases.</strong> &ldquo;Loop Pilot&rdquo; was only a pipe-check. Diagram 3 shows where it fits.</div>
+
+  <!-- ============ 1. THE LOOP ============ -->
+  <section>
+    <h2>1 &middot; One lap of the loop &mdash; repeats until queue empty, then stops itself</h2>
+    <svg viewBox="0 0 660 630" role="img" aria-label="Six-step loop: pick, claim, do, verify, close, report">
+      <!-- ring -->
+      <circle cx="330" cy="315" r="190" fill="none" stroke="var(--ring)" stroke-width="2.5" stroke-dasharray="6 7"/>
+      <!-- direction arrowheads on ring (clockwise) -->
+      <g fill="var(--accent)">
+        <polygon points="0,-7 13,0 0,7" transform="translate(425,150.5) rotate(30)"/>
+        <polygon points="0,-7 13,0 0,7" transform="translate(520,315) rotate(90)"/>
+        <polygon points="0,-7 13,0 0,7" transform="translate(425,479.5) rotate(150)"/>
+        <polygon points="0,-7 13,0 0,7" transform="translate(235,479.5) rotate(210)"/>
+        <polygon points="0,-7 13,0 0,7" transform="translate(140,315) rotate(270)"/>
+        <polygon points="0,-7 13,0 0,7" transform="translate(235,150.5) rotate(330)"/>
+      </g>
+      <!-- center -->
+      <text x="330" y="295" text-anchor="middle" font-size="42">🔁</text>
+      <text x="330" y="330" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)">one task per lap</text>
+      <text x="330" y="350" text-anchor="middle" font-size="12" fill="var(--muted)">queue empty &rarr; loop stops itself</text>
+
+      <!-- nodes -->
+      <g font-weight="700" font-size="14">
+        <!-- 1 PICK (top) -->
+        <rect x="262" y="97" width="136" height="58" rx="10" fill="var(--card)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="330" y="121" text-anchor="middle" fill="var(--accent)">1 &middot; PICK</text>
+        <text x="330" y="140" text-anchor="middle" font-size="10.5" font-weight="400" fill="var(--muted)">one todo &middot; urgent first</text>
+        <!-- 2 CLAIM -->
+        <rect x="426" y="192" width="136" height="58" rx="10" fill="var(--card)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="494" y="216" text-anchor="middle" fill="var(--accent)">2 &middot; CLAIM</text>
+        <text x="494" y="235" text-anchor="middle" font-size="10.5" font-weight="400" fill="var(--muted)">lock task + timer on</text>
+        <!-- 3 DO -->
+        <rect x="426" y="382" width="136" height="58" rx="10" fill="var(--card)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="494" y="406" text-anchor="middle" fill="var(--accent)">3 &middot; DO</text>
+        <text x="494" y="425" text-anchor="middle" font-size="10.5" font-weight="400" fill="var(--muted)">work in project folder</text>
+        <!-- 4 VERIFY (bottom) -->
+        <rect x="262" y="477" width="136" height="58" rx="10" fill="var(--card)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="330" y="501" text-anchor="middle" fill="var(--accent)">4 &middot; VERIFY</text>
+        <text x="330" y="520" text-anchor="middle" font-size="10.5" font-weight="400" fill="var(--muted)">proof or no &ldquo;done&rdquo;</text>
+        <!-- 5 CLOSE -->
+        <rect x="98" y="382" width="136" height="58" rx="10" fill="var(--card)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="166" y="406" text-anchor="middle" fill="var(--accent)">5 &middot; CLOSE</text>
+        <text x="166" y="425" text-anchor="middle" font-size="10.5" font-weight="400" fill="var(--muted)">complete + note in task</text>
+        <!-- 6 REPORT -->
+        <rect x="98" y="192" width="136" height="58" rx="10" fill="var(--card)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="166" y="216" text-anchor="middle" fill="var(--accent)">6 &middot; REPORT</text>
+        <text x="166" y="235" text-anchor="middle" font-size="10.5" font-weight="400" fill="var(--muted)">files + proof + queue left</text>
+      </g>
+    </svg>
+  </section>
+
+  <!-- ============ 2. LANES ============ -->
+  <section>
+    <h2>2 &middot; Safety lanes &mdash; the title tag decides how far the loop may go</h2>
+    <svg viewBox="0 0 740 350" role="img" aria-label="Lane gate: task title prefix routes to four outcomes">
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/>
+        </marker>
+      </defs>
+      <!-- task source -->
+      <rect x="12" y="130" width="126" height="90" rx="10" fill="var(--code-bg)" stroke="var(--line)"/>
+      <text x="75" y="168" text-anchor="middle" font-size="26">🗂️</text>
+      <text x="75" y="192" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">task picked</text>
+      <text x="75" y="207" text-anchor="middle" font-size="10.5" fill="var(--muted)">loop reads title tag</text>
+
+      <!-- fan arrows to chips -->
+      <g stroke="var(--muted)" stroke-width="1.8" fill="none" marker-end="url(#arr)">
+        <line x1="138" y1="150" x2="222" y2="62"/>
+        <line x1="138" y1="168" x2="222" y2="148"/>
+        <line x1="138" y1="185" x2="222" y2="233"/>
+        <line x1="138" y1="203" x2="222" y2="318"/>
+      </g>
+
+      <!-- chips -->
+      <g font-size="13" font-weight="700" class="mono">
+        <rect x="228" y="44" width="104" height="36" rx="8" fill="var(--auto-soft)"/>
+        <text x="280" y="67" text-anchor="middle" fill="var(--auto)">[AUTO]</text>
+        <rect x="228" y="130" width="104" height="36" rx="8" fill="var(--me-soft)"/>
+        <text x="280" y="153" text-anchor="middle" fill="var(--me)">[ME]</text>
+        <rect x="228" y="215" width="104" height="36" rx="8" fill="var(--none-soft)"/>
+        <text x="280" y="238" text-anchor="middle" font-size="11.5" fill="var(--none)">no tag</text>
+        <rect x="228" y="300" width="104" height="36" rx="8" fill="var(--blocked-soft)"/>
+        <text x="280" y="323" text-anchor="middle" fill="var(--blocked)">[BLOCKED]</text>
+      </g>
+
+      <!-- chip -> outcome arrows -->
+      <g stroke="var(--muted)" stroke-width="1.8" fill="none" marker-end="url(#arr)">
+        <line x1="332" y1="62" x2="416" y2="62"/>
+        <line x1="332" y1="148" x2="416" y2="148"/>
+        <line x1="332" y1="233" x2="416" y2="233"/>
+        <line x1="332" y1="318" x2="416" y2="318"/>
+      </g>
+
+      <!-- outcomes -->
+      <g>
+        <rect x="420" y="34" width="308" height="58" rx="10" fill="var(--card)" stroke="var(--auto)" stroke-width="2"/>
+        <text x="438" y="59" font-size="13" font-weight="700" fill="var(--auto)">✅ DOES EVERYTHING</text>
+        <text x="438" y="78" font-size="11" fill="var(--muted)">finishes task, proves it, marks complete</text>
+
+        <rect x="420" y="120" width="308" height="58" rx="10" fill="var(--card)" stroke="var(--me)" stroke-width="2"/>
+        <text x="438" y="145" font-size="13" font-weight="700" fill="var(--me)">✋ PREPS, THEN STOPS</text>
+        <text x="438" y="164" font-size="11" fill="var(--muted)">draft ready &middot; final send/publish = yours</text>
+
+        <rect x="420" y="205" width="308" height="58" rx="10" fill="var(--card)" stroke="var(--none)" stroke-width="2" stroke-dasharray="5 4"/>
+        <text x="438" y="230" font-size="13" font-weight="700" fill="var(--none)">🛡️ SAME AS [ME]</text>
+        <text x="438" y="249" font-size="11" fill="var(--muted)">forgot tag? safe by default</text>
+
+        <rect x="420" y="290" width="308" height="58" rx="10" fill="var(--card)" stroke="var(--blocked)" stroke-width="2"/>
+        <text x="438" y="315" font-size="13" font-weight="700" fill="var(--blocked)">⏸️ SKIPPED</text>
+        <text x="438" y="334" font-size="11" fill="var(--muted)">waiting on you &middot; reason written in task</text>
+      </g>
+    </svg>
+    <svg viewBox="0 0 740 64" role="img" aria-label="Never in any lane">
+      <rect x="0" y="6" width="740" height="52" rx="10" fill="var(--blocked-soft)"/>
+      <text x="18" y="38" font-size="13" font-weight="700" fill="var(--blocked)">NEVER, IN ANY LANE:</text>
+      <text x="188" y="38" font-size="13" fill="var(--ink)">📧 send email &nbsp;&middot;&nbsp; 🚀 push live &nbsp;&middot;&nbsp; 🗑️ delete data &nbsp;&middot;&nbsp; 📜 edit CLAUDE.md</text>
+    </svg>
+  </section>
+
+  <!-- ============ 3. WHERE IT FITS ============ -->
+  <section>
+    <h2>3 &middot; Where it fits &mdash; plan first, loop executes the phases</h2>
+    <svg viewBox="0 0 740 250" role="img" aria-label="Pipeline: plan, save phases as tasks, fire loop, review">
+      <defs>
+        <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/>
+        </marker>
+      </defs>
+      <g stroke="var(--accent)" stroke-width="2.5" fill="none" marker-end="url(#arr2)">
+        <line x1="178" y1="105" x2="200" y2="105"/>
+        <line x1="368" y1="105" x2="390" y2="105"/>
+        <line x1="558" y1="105" x2="580" y2="105"/>
+      </g>
+      <!-- step 1 -->
+      <rect x="10" y="45" width="168" height="120" rx="12" fill="var(--card)" stroke="var(--line)" stroke-width="1.5"/>
+      <text x="94" y="88" text-anchor="middle" font-size="30">🧠</text>
+      <text x="94" y="115" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">YOU PLAN</text>
+      <text x="94" y="133" text-anchor="middle" font-size="10.5" fill="var(--muted)">grill session / phase plan</text>
+      <text x="94" y="148" text-anchor="middle" font-size="10.5" fill="var(--muted)">(like Focus OS Phases A&ndash;E)</text>
+      <!-- step 2 -->
+      <rect x="200" y="45" width="168" height="120" rx="12" fill="var(--card)" stroke="var(--line)" stroke-width="1.5"/>
+      <text x="284" y="88" text-anchor="middle" font-size="30">🗂️</text>
+      <text x="284" y="115" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">PHASES &rarr; TASKS</text>
+      <text x="284" y="133" text-anchor="middle" font-size="10.5" fill="var(--muted)">into that project's Focus OS</text>
+      <text x="284" y="148" text-anchor="middle" font-size="10.5" fill="var(--muted)">queue, tagged + Done when:</text>
+      <!-- step 3 -->
+      <rect x="390" y="45" width="168" height="120" rx="12" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+      <text x="474" y="88" text-anchor="middle" font-size="30">🔁</text>
+      <text x="474" y="115" text-anchor="middle" font-size="13" font-weight="700" fill="var(--accent)">LOOP EXECUTES</text>
+      <text x="474" y="133" text-anchor="middle" font-size="10.5" fill="var(--muted)">/loop /focus-loop &lt;project&gt;</text>
+      <text x="474" y="148" text-anchor="middle" font-size="10.5" fill="var(--muted)">drains phases one by one</text>
+      <!-- step 4 -->
+      <rect x="580" y="45" width="150" height="120" rx="12" fill="var(--card)" stroke="var(--line)" stroke-width="1.5"/>
+      <text x="655" y="88" text-anchor="middle" font-size="30">👀</text>
+      <text x="655" y="115" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">YOU REVIEW</text>
+      <text x="655" y="133" text-anchor="middle" font-size="10.5" fill="var(--muted)">approve [ME] drafts,</text>
+      <text x="655" y="148" text-anchor="middle" font-size="10.5" fill="var(--muted)">unblock [BLOCKED]</text>
+
+      <text x="370" y="215" text-anchor="middle" font-size="12" fill="var(--muted)">every completed task keeps its proof note in Focus OS = your audit trail</text>
+    </svg>
+  </section>
+
+  <!-- ============ 4. TEST TIMELINE ============ -->
+  <section>
+    <h2>4 &middot; What to test it on</h2>
+    <svg viewBox="0 0 740 235" role="img" aria-label="Timeline: now Loop Pilot, next planned build, Aug 31 school pipelines">
+      <line x1="50" y1="52" x2="700" y2="52" stroke="var(--ring)" stroke-width="3"/>
+      <g>
+        <circle cx="115" cy="52" r="11" fill="var(--accent)"/>
+        <circle cx="375" cy="52" r="11" fill="var(--accent)"/>
+        <circle cx="635" cy="52" r="11" fill="var(--accent)"/>
+      </g>
+      <g text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--accent)">
+        <text x="115" y="30">NOW &middot; 5 MIN</text>
+        <text x="375" y="30">NEXT PLANNED BUILD</text>
+        <text x="635" y="30">AUG 31 &middot; SCHOOL BACK</text>
+      </g>
+      <g>
+        <rect x="20" y="80" width="190" height="130" rx="12" fill="var(--card)" stroke="var(--line)" stroke-width="1.5"/>
+        <text x="115" y="112" text-anchor="middle" font-size="24">🧪</text>
+        <text x="115" y="136" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">Loop Pilot queue</text>
+        <text x="115" y="154" text-anchor="middle" font-size="10.5" fill="var(--muted)">2 boring tasks left &middot; pipe check</text>
+        <text x="115" y="172" text-anchor="middle" font-size="10.5" fill="var(--muted)">watch 2 laps + self-stop</text>
+        <text x="115" y="192" text-anchor="middle" font-size="10" font-weight="600" fill="var(--accent)" class="mono">/loop /focus-loop Loop Pilot</text>
+
+        <rect x="280" y="80" width="190" height="130" rx="12" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="375" y="112" text-anchor="middle" font-size="24">🏗️</text>
+        <text x="375" y="136" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">THE REAL TEST</text>
+        <text x="375" y="154" text-anchor="middle" font-size="10.5" fill="var(--muted)">your next phase plan &rarr; queue</text>
+        <text x="375" y="172" text-anchor="middle" font-size="10.5" fill="var(--muted)">Focus OS redesign &middot; SFA prep</text>
+        <text x="375" y="190" text-anchor="middle" font-size="10.5" fill="var(--muted)">&middot; Holiday Jobs</text>
+
+        <rect x="540" y="80" width="190" height="130" rx="12" fill="var(--card)" stroke="var(--line)" stroke-width="1.5"/>
+        <text x="635" y="112" text-anchor="middle" font-size="24">🏫</text>
+        <text x="635" y="136" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">Flagship loops</text>
+        <text x="635" y="154" text-anchor="middle" font-size="10.5" fill="var(--muted)">Certificate Pipeline weekly</text>
+        <text x="635" y="172" text-anchor="middle" font-size="10.5" fill="var(--muted)">[AUTO] make &rarr; [ME] send</text>
+        <text x="635" y="190" text-anchor="middle" font-size="10.5" fill="var(--muted)">+ TRS morning check</text>
+      </g>
+    </svg>
+  </section>
+
+  <!-- ============ 5. TASK ANATOMY ============ -->
+  <section>
+    <h2>5 &middot; Anatomy of a loop-ready task</h2>
+    <svg viewBox="0 0 740 240" role="img" aria-label="Task card with lane tag and Done when line labelled">
+      <!-- task card -->
+      <rect x="25" y="25" width="440" height="190" rx="12" fill="var(--code-bg)" stroke="var(--line)" stroke-width="1.5"/>
+      <!-- title -->
+      <text x="50" y="68" font-size="15" font-weight="700" class="mono">
+        <tspan fill="var(--auto)">[AUTO]</tspan><tspan fill="var(--ink)" dx="8">Rebuild R3 snapshot</tspan>
+      </text>
+      <line x1="50" y1="88" x2="440" y2="88" stroke="var(--line)"/>
+      <!-- description -->
+      <text x="50" y="118" font-size="12.5" fill="var(--muted)">Pull latest form submissions, dedupe by lesson,</text>
+      <text x="50" y="138" font-size="12.5" fill="var(--muted)">recompute averages, redeploy dashboard.</text>
+      <rect x="42" y="156" width="406" height="42" rx="8" fill="var(--auto-soft)"/>
+      <text x="54" y="182" font-size="12.5" class="mono">
+        <tspan font-weight="700" fill="var(--auto)">Done when:</tspan><tspan fill="var(--ink)" dx="6">dashboard shows 14 lessons, browser-checked</tspan>
+      </text>
+
+      <!-- callout 1: lane tag -->
+      <line x1="112" y1="55" x2="112" y2="14" stroke="var(--auto)" stroke-width="1.8"/>
+      <line x1="112" y1="14" x2="500" y2="14" stroke="var(--auto)" stroke-width="1.8"/>
+      <text x="508" y="18" font-size="12" font-weight="700" fill="var(--auto)">lane tag = permission level</text>
+
+      <!-- callout 2: done when -->
+      <line x1="448" y1="177" x2="500" y2="177" stroke="var(--auto)" stroke-width="1.8"/>
+      <text x="508" y="172" font-size="12" font-weight="700" fill="var(--auto)">provable OUTCOME</text>
+      <text x="508" y="189" font-size="11" fill="var(--muted)">something checkable, not</text>
+      <text x="508" y="204" font-size="11" fill="var(--muted)">&ldquo;file modified today&rdquo;</text>
+    </svg>
+  </section>
+</main>
+</body>
+</html>
