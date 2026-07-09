@@ -69,7 +69,7 @@
     <div class="cmdbar">/loop /focus-loop <span>&lt;any Focus OS project&gt;</span></div>
   </header>
 
-  <div class="banner"><strong>Real test = a project where you planned phases.</strong> &ldquo;Loop Pilot&rdquo; was only a pipe-check. Diagram 3 shows where it fits.</div>
+  <div class="banner"><strong>Real test = a project where you planned phases.</strong> &ldquo;Loop Pilot&rdquo; was only a pipe-check. Diagram 4 shows where it fits.</div>
 
   <!-- ============ 1. THE LOOP ============ -->
   <section>
@@ -121,9 +121,55 @@
     </svg>
   </section>
 
-  <!-- ============ 2. LANES ============ -->
+  <!-- ============ 2. FOREMAN + WORKERS ============ -->
   <section>
-    <h2>2 &middot; Safety lanes &mdash; the title tag decides how far the loop may go</h2>
+    <h2>2 &middot; Who does the work &mdash; foreman + cheap workers (saves Fable credits)</h2>
+    <svg viewBox="0 0 740 350" role="img" aria-label="Foreman model delegates work to cheaper worker models and verifies results">
+      <defs>
+        <marker id="arr3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/>
+        </marker>
+      </defs>
+      <!-- foreman -->
+      <rect x="200" y="18" width="340" height="88" rx="12" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+      <text x="370" y="46" text-anchor="middle" font-size="15" font-weight="700" fill="var(--accent)">🧠 FOREMAN &mdash; the loop session</text>
+      <text x="370" y="68" text-anchor="middle" font-size="11" fill="var(--muted)">Fable 5 (hard loops) or Opus (routine loops)</text>
+      <text x="370" y="88" text-anchor="middle" font-size="11" font-weight="600" fill="var(--ink)">picks &middot; judges size &middot; VERIFIES &middot; closes</text>
+      <!-- delegate arrows -->
+      <g stroke="var(--accent)" stroke-width="2.5" fill="none" marker-end="url(#arr3)">
+        <line x1="280" y1="108" x2="130" y2="166"/>
+        <line x1="370" y1="108" x2="370" y2="166"/>
+        <line x1="460" y1="108" x2="610" y2="166"/>
+      </g>
+      <text x="392" y="142" font-size="10.5" fill="var(--muted)">delegates the DO step</text>
+      <!-- workers -->
+      <g>
+        <rect x="15" y="170" width="210" height="106" rx="12" fill="var(--card)" stroke="var(--line)" stroke-width="1.5"/>
+        <text x="120" y="202" text-anchor="middle" font-size="22">🐜</text>
+        <text x="120" y="226" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--ink)">HAIKU &mdash; trivial</text>
+        <text x="120" y="244" text-anchor="middle" font-size="10.5" fill="var(--muted)">renames &middot; log checks</text>
+        <text x="120" y="260" text-anchor="middle" font-size="10.5" fill="var(--muted)">simple file ops</text>
+
+        <rect x="265" y="170" width="210" height="106" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="370" y="202" text-anchor="middle" font-size="22">🔨</text>
+        <text x="370" y="226" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--accent)">SONNET &mdash; default</text>
+        <text x="370" y="244" text-anchor="middle" font-size="10.5" fill="var(--muted)">normal build work</text>
+        <text x="370" y="260" text-anchor="middle" font-size="10.5" fill="var(--muted)">most tasks land here</text>
+
+        <rect x="515" y="170" width="210" height="106" rx="12" fill="var(--card)" stroke="var(--line)" stroke-width="1.5"/>
+        <text x="620" y="202" text-anchor="middle" font-size="22">🏋️</text>
+        <text x="620" y="226" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--ink)">OPUS &mdash; hard</text>
+        <text x="620" y="244" text-anchor="middle" font-size="10.5" fill="var(--muted)">complex builds</text>
+        <text x="620" y="260" text-anchor="middle" font-size="10.5" fill="var(--muted)">nasty bugs</text>
+      </g>
+      <text x="370" y="306" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--ink)">work returns &uarr; foreman checks the Done when: proof &mdash; a worker NEVER closes its own task</text>
+      <text x="370" y="330" text-anchor="middle" font-size="10.5" fill="var(--muted)">tiny task? foreman skips workers and does it itself &middot; cheap workers = Fable credits saved + weekly limits stretched</text>
+    </svg>
+  </section>
+
+  <!-- ============ 3. LANES ============ -->
+  <section>
+    <h2>3 &middot; Safety lanes &mdash; the title tag decides how far the loop may go</h2>
     <svg viewBox="0 0 740 350" role="img" aria-label="Lane gate: task title prefix routes to four outcomes">
       <defs>
         <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -192,7 +238,7 @@
 
   <!-- ============ 3. WHERE IT FITS ============ -->
   <section>
-    <h2>3 &middot; Where it fits &mdash; plan first, loop executes the phases</h2>
+    <h2>4 &middot; Where it fits &mdash; plan first, loop executes the phases</h2>
     <svg viewBox="0 0 740 250" role="img" aria-label="Pipeline: plan, save phases as tasks, fire loop, review">
       <defs>
         <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
@@ -235,7 +281,7 @@
 
   <!-- ============ 4. TEST TIMELINE ============ -->
   <section>
-    <h2>4 &middot; What to test it on</h2>
+    <h2>5 &middot; What to test it on</h2>
     <svg viewBox="0 0 740 235" role="img" aria-label="Timeline: now Loop Pilot, next planned build, Aug 31 school pipelines">
       <line x1="50" y1="52" x2="700" y2="52" stroke="var(--ring)" stroke-width="3"/>
       <g>
@@ -275,7 +321,7 @@
 
   <!-- ============ 5. TASK ANATOMY ============ -->
   <section>
-    <h2>5 &middot; Anatomy of a loop-ready task</h2>
+    <h2>6 &middot; Anatomy of a loop-ready task</h2>
     <svg viewBox="0 0 740 240" role="img" aria-label="Task card with lane tag and Done when line labelled">
       <!-- task card -->
       <rect x="25" y="25" width="440" height="190" rx="12" fill="var(--code-bg)" stroke="var(--line)" stroke-width="1.5"/>

@@ -34,15 +34,21 @@ One iteration = ONE task. Small iterations -> fresh context, no rot. Never batch
 - `update_task` -> status `in-progress`, then `start_task_timer`.
 - Claim = lock. A task already `in-progress` belongs to another session -> skip it.
 
-## 4. Do
+## 4. Do — foreman/worker split
 
 - Description must contain a `Done when:` line. Missing -> BLOCKED with reason `no Done when line`, pick next task.
 - Work inside that task's project folder. That project's CLAUDE.md is authoritative.
+- **Judge task size, then delegate:**
+  - Tiny task (few minutes, one or two files) -> do it yourself. Spawning a worker costs more than it saves.
+  - Bigger task -> spawn ONE subagent via the Agent tool to do the build work. Model by difficulty: `haiku` for trivial mechanical work (renames, log checks, simple file ops), `sonnet` for normal build work (the default), `opus` for hard/complex work. Only use `fable` workers when the task explicitly demands top-tier reasoning.
+  - Give the worker: the full task description incl. `Done when:`, the exact project folder path, and the relevant CLAUDE.md rules (lanes + hard rules bind the worker too).
+  - Worker returns what it did + exact file paths. **Worker output = claim, not proof.**
 
-## 5. Verify — proof or no completion
+## 5. Verify — proof or no completion — NEVER delegated
 
+- Verify yourself (the orchestrator). Never let the worker or a cheaper model grade its own work.
 - Test the `Done when:` condition with real evidence: command output, file content/mtime, browser check (preview tools) for anything UI.
-- Never claim done without proof. Verify fails -> fix and re-verify, or BLOCKED with reason.
+- Never claim done without proof. Verify fails -> fix (or re-brief the worker) and re-verify, or BLOCKED with reason.
 
 ## 6. Close
 
